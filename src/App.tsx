@@ -14,7 +14,8 @@ export default function App() {
   return (
     <div className="app">
       <header>
-        <h1>F1 Telemetry Dashboard — First slice</h1>
+        <h1>🏎️ F1 Telemetry Dashboard</h1>
+        <p className="subtitle">Explore race data, tyre strategies, and performance analysis</p>
       </header>
       <main>
         <RaceSelector defaultRace={latestRace} />

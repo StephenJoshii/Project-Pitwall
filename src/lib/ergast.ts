@@ -1,14 +1,29 @@
 export async function fetchLatestRace() {
   // Ergast.com is shutdown; using Jolpica F1 API (Ergast replacement)
-  // Fetch this season's results to find the last completed race
-  const res = await fetch('https://api.jolpi.ca/ergast/f1/current/results.json')
+  // Fetch 2024 season results (2025 data is incomplete/test data)
+  const res = await fetch('https://api.jolpi.ca/ergast/f1/2024/results.json')
   if (!res.ok) throw new Error('Failed to fetch latest race')
   const data = await res.json()
   // Find most recent round from MRData.RaceTable.Races
   const races = data.MRData?.RaceTable?.Races || []
   const last = races[races.length - 1]
   // Minimal shape: season and round
-  return { season: last?.season || 'current', round: last?.round || '1', raceName: last?.raceName || 'Unknown' }
+  return { season: last?.season || '2024', round: last?.round || '1', raceName: last?.raceName || 'Unknown' }
+}
+
+export async function fetchSeasonRaces(season: string) {
+  // Fetch all races for a season
+  const res = await fetch(`https://api.jolpi.ca/ergast/f1/${season}/results.json?limit=100`)
+  if (!res.ok) throw new Error('Failed to fetch season races')
+  const data = await res.json()
+  const races = data.MRData?.RaceTable?.Races || []
+  return races.map((r: any) => ({
+    season: r.season,
+    round: r.round,
+    raceName: r.raceName,
+    date: r.date,
+    circuitName: r.Circuit?.circuitName || 'Unknown Circuit'
+  }))
 }
 
 export async function fetchRaceDrivers(season: string, round: string) {

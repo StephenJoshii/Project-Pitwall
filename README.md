@@ -27,9 +27,22 @@ npm run dev
 
 Open http://localhost:5173 (or the port shown in terminal) in your browser.
 
+## Usage
+
+- **Season Selector**: Choose from 2021-2024 seasons (default: 2024, which has complete race data)
+- **Race Dropdown**: Select any race from the season (labeled by round number and race name)
+- **Driver Selection**: Click driver buttons to select/deselect (multiple selection supported)
+- **Charts**: All visualizations update automatically when you change drivers or races
+
+### Understanding "Round"
+- **Round** = Race number in the season (e.g., Round 1 = Australian GP, Round 5 = Miami GP)
+- A typical F1 season has 20-24 rounds (races)
+
 ## API Note
 
 The original Ergast API (ergast.com) was shut down in early 2024. This app uses the **Jolpica F1 API** (https://api.jolpi.ca/ergast/f1/) which is a drop-in replacement that maintains the same JSON structure and endpoints.
+
+**Data Availability**: 2024 season has complete data. 2025 data is incomplete/test data (only 2 races available).
 
 ## Next steps
 
