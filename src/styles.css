@@ -42,6 +42,7 @@ body { font-family: Inter, Roboto, system-ui, -apple-system, 'Segoe UI', Roboto,
 .telemetry-view { margin-top: 16px; background: white; padding: 16px; border-radius: 8px; box-shadow: 0 1px 4px rgba(16,24,40,0.06); }
 .telemetry-view h3 { margin-top: 0; margin-bottom: 8px; }
 .telemetry-note { background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; padding: 8px; margin-bottom: 12px; font-size: 13px; color: #856404; }
+.telemetry-note-success { background: #d1fae5; border-color: #10b981; color: #065f46; }
 .telemetry-controls { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
 .lap-time-comparison { display: flex; gap: 16px; align-items: center; padding: 12px; background: #f9fafb; border-radius: 6px; margin-bottom: 16px; flex-wrap: wrap; }
 .lap-time-item { display: flex; flex-direction: column; gap: 4px; }

@@ -133,7 +133,7 @@ export default function RaceSelector({ defaultRace }: Props) {
 
       <TyreDegradationChart pitStops={pitStops} laps={laps} drivers={selectedDrivers} />
 
-      <TelemetryView laps={laps} drivers={selectedDrivers} raceName={race.raceName} />
+      <TelemetryView laps={laps} drivers={selectedDrivers} raceName={race.raceName} season={race.season} round={race.round} />
     </div>
   )
 }

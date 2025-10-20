@@ -24,8 +24,13 @@ Interactive Formula 1 Race Telemetry Dashboard for exploring and analyzing race 
 - **Throttle & Brake Chart**: See throttle application and braking points for both drivers
 - **Gear Selection Chart**: Compare gear changes and racing lines
 - **Lap Time Delta**: Shows the time difference between the two drivers
+- **Real Data Integration**: Automatically uses OpenF1 API for real lap times and sector speeds when available!
 
-**Note**: Telemetry data (speed, throttle, brake, gear) is simulated based on lap times and circuit characteristics. Real telemetry requires FastF1 library or official F1 data sources.
+**Data Sources**:
+- **Lap Times**: Real data from OpenF1 API for 2024 season (when available)
+- **Sector Speeds**: Real intermediate and speed trap data from OpenF1
+- **Telemetry Patterns**: Simulated based on real lap times and sector speeds
+- **Note**: Per-sample telemetry (throttle/brake at each meter) would require downloading very large datasets or using FastF1 library
 
 ## Run locally
 
@@ -50,9 +55,14 @@ Open http://localhost:5173 (or the port shown in terminal) in your browser.
 
 ## API Note
 
-The original Ergast API (ergast.com) was shut down in early 2024. This app uses the **Jolpica F1 API** (https://api.jolpi.ca/ergast/f1/) which is a drop-in replacement that maintains the same JSON structure and endpoints.
+The original Ergast API (ergast.com) was shut down in early 2024. This app uses:
+- **Jolpica F1 API** (https://api.jolpi.ca/ergast/f1/) - Drop-in Ergast replacement for race results, standings, and pit stops
+- **OpenF1 API** (https://openf1.org/) - Real telemetry and timing data for recent races (2023+)
 
-**Data Availability**: 2024 season has complete data. 2025 data is incomplete/test data (only 2 races available).
+**Data Availability**: 
+- 2024 season has complete data in both APIs
+- OpenF1 provides real lap times, sector times, and speed trap data
+- 2025 data is incomplete/test data (only 2 races available)
 
 ## Next steps
 
