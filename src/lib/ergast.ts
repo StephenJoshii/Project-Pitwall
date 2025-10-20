@@ -30,3 +30,14 @@ export async function fetchLapTimes(season: string, round: string) {
   const laps = data.MRData?.RaceTable?.Races?.[0]?.Laps || []
   return laps
 }
+
+export async function fetchPitStops(season: string, round: string) {
+  // Fetch pit stop data to determine tyre stints
+  const url = `https://api.jolpi.ca/ergast/f1/${season}/${round}/pitstops.json`
+  const res = await fetch(url)
+  if (!res.ok) throw new Error('Failed to fetch pit stops')
+  const data = await res.json()
+  // data.MRData.RaceTable.Races[0].PitStops -> array of pit stops
+  const pitStops = data.MRData?.RaceTable?.Races?.[0]?.PitStops || []
+  return pitStops
+}
