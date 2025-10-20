@@ -4,6 +4,7 @@ import DriverSelector from './DriverSelector'
 import LapTimesChart from './LapTimesChart'
 import TyreStrategyChart from './TyreStrategyChart'
 import TyreDegradationChart from './TyreDegradationChart'
+import TelemetryView from './TelemetryView'
 
 type Props = { defaultRace: { season: string; round: string; raceName: string } }
 
@@ -131,6 +132,8 @@ export default function RaceSelector({ defaultRace }: Props) {
       <TyreStrategyChart pitStops={pitStops} laps={laps} drivers={selectedDrivers} />
 
       <TyreDegradationChart pitStops={pitStops} laps={laps} drivers={selectedDrivers} />
+
+      <TelemetryView laps={laps} drivers={selectedDrivers} raceName={race.raceName} />
     </div>
   )
 }

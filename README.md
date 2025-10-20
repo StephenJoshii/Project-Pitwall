@@ -17,6 +17,16 @@ Interactive Formula 1 Race Telemetry Dashboard for exploring and analyzing race 
 
 **Note**: Tyre compound data is simulated as the Ergast/Jolpica API doesn't provide compound information. For real compound data, FastF1 integration would be needed.
 
+### ✅ Part 3: Head-to-Head Telemetry
+- **Lap Selector**: Choose any lap from the race for detailed analysis
+- **Driver Comparison**: Pick two drivers to compare side-by-side
+- **Speed Chart**: Visual comparison of speed throughout the lap
+- **Throttle & Brake Chart**: See throttle application and braking points for both drivers
+- **Gear Selection Chart**: Compare gear changes and racing lines
+- **Lap Time Delta**: Shows the time difference between the two drivers
+
+**Note**: Telemetry data (speed, throttle, brake, gear) is simulated based on lap times and circuit characteristics. Real telemetry requires FastF1 library or official F1 data sources.
+
 ## Run locally
 
 ```bash
@@ -46,4 +56,9 @@ The original Ergast API (ergast.com) was shut down in early 2024. This app uses 
 
 ## Next steps
 
-- Head-to-head telemetry view with speed, throttle, brake, and gear data
+Future enhancements could include:
+- Integration with FastF1 Python library for real telemetry data
+- Weather data visualization
+- Sector time comparisons
+- Team radio transcripts
+- Driver championship standings

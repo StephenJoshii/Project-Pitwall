@@ -37,3 +37,17 @@ body { font-family: Inter, Roboto, system-ui, -apple-system, 'Segoe UI', Roboto,
 .legend { display: flex; gap: 12px; flex-wrap: wrap; }
 .legend-item { display: flex; align-items: center; gap: 4px; font-size: 13px; }
 .legend-color { width: 20px; height: 20px; border-radius: 3px; border: 1px solid #ddd; }
+
+/* Telemetry View */
+.telemetry-view { margin-top: 16px; background: white; padding: 16px; border-radius: 8px; box-shadow: 0 1px 4px rgba(16,24,40,0.06); }
+.telemetry-view h3 { margin-top: 0; margin-bottom: 8px; }
+.telemetry-note { background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; padding: 8px; margin-bottom: 12px; font-size: 13px; color: #856404; }
+.telemetry-controls { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+.lap-time-comparison { display: flex; gap: 16px; align-items: center; padding: 12px; background: #f9fafb; border-radius: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+.lap-time-item { display: flex; flex-direction: column; gap: 4px; }
+.driver-name { font-size: 13px; font-weight: 600; }
+.lap-time { font-size: 20px; font-weight: 700; font-family: 'Courier New', monospace; }
+.lap-time-delta { margin-left: auto; padding: 6px 12px; background: #e0e7ff; color: #3730a3; border-radius: 4px; font-weight: 600; font-size: 14px; }
+.telemetry-charts { display: flex; flex-direction: column; gap: 20px; }
+.telemetry-chart-container { background: #fafafa; padding: 12px; border-radius: 6px; }
+.telemetry-chart-container h4 { margin: 0 0 8px 0; font-size: 16px; color: #374151; }
