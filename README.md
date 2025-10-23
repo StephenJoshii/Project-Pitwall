@@ -4,10 +4,17 @@ Interactive Formula 1 Race Telemetry Dashboard for exploring and analyzing race 
 
 ## Features Implemented
 
-### 🎯 Navigation
-- **Tabbed Interface**: Clean navigation between Race Pace, Tyre Strategy, and Telemetry views
-- **Smooth Transitions**: Animated tab switching for better UX
-- **Organized Layout**: Each analysis type in its own focused view
+### 🧭 Navigation & Layout
+- **Sidebar Navigation**: Persistent sidebar with navigation between Race Analysis and Season Overview pages
+- **Tabbed Interface**: Clean navigation within Race Analysis between Race Pace, Tyre Strategy, and Telemetry views
+- **Smooth Transitions**: Animated transitions for better UX
+- **Modern Design**: Dark sidebar with gradient, professional table layouts
+
+### 🏆 Season Overview
+- **Driver Standings**: Complete championship standings table with positions, points, wins, and team information
+- **Constructor Standings**: Team championship with points and victories
+- **Real-Time Data**: Automatically fetches latest standings for the current season
+- **Interactive Tables**: Clean, sortable tables with leader highlighting
 
 ### ✅ Part 1: Race Pace Analysis
 - Automatically loads the most recently completed race (using the Jolpica F1 API - Ergast replacement)
@@ -49,6 +56,13 @@ Open http://localhost:5173 (or the port shown in terminal) in your browser.
 
 ## Usage
 
+### Navigation
+- **Race Analysis**: Click the 📊 Race Analysis button in the sidebar to view detailed race data
+  - Use tabs to switch between Race Pace, Tyre Strategy, and Telemetry views
+- **Season Overview**: Click the 🏆 Season Overview button to view championship standings
+  - Toggle between Driver and Constructor standings
+
+### Race Analysis
 - **Season Selector**: Choose from 2021-2024 seasons (default: 2024, which has complete race data)
 - **Race Dropdown**: Select any race from the season (labeled by round number and race name)
 - **Driver Selection**: Click driver buttons to select/deselect (multiple selection supported)
@@ -72,8 +86,10 @@ The original Ergast API (ergast.com) was shut down in early 2024. This app uses:
 ## Next steps
 
 Future enhancements could include:
-- Integration with FastF1 Python library for real telemetry data
-- Weather data visualization
-- Sector time comparisons
-- Team radio transcripts
-- Driver championship standings
+- Integration with FastF1 Python library for real telemetry data (per-meter throttle/brake)
+- Weather data visualization (temperature, rain, wind)
+- Sector time comparisons and mini-sectors analysis
+- Team radio transcripts integration
+- Race calendar with upcoming events
+- Historical season comparisons
+- Live timing during race weekends

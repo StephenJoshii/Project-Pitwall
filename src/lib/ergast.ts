@@ -56,3 +56,23 @@ export async function fetchPitStops(season: string, round: string) {
   const pitStops = data.MRData?.RaceTable?.Races?.[0]?.PitStops || []
   return pitStops
 }
+
+export async function fetchDriverStandings(season: string) {
+  // Fetch driver championship standings
+  const url = `https://api.jolpi.ca/ergast/f1/${season}/driverStandings.json`
+  const res = await fetch(url)
+  if (!res.ok) throw new Error('Failed to fetch driver standings')
+  const data = await res.json()
+  const standings = data.MRData?.StandingsTable?.StandingsLists?.[0]?.DriverStandings || []
+  return standings
+}
+
+export async function fetchConstructorStandings(season: string) {
+  // Fetch constructor championship standings
+  const url = `https://api.jolpi.ca/ergast/f1/${season}/constructorStandings.json`
+  const res = await fetch(url)
+  if (!res.ok) throw new Error('Failed to fetch constructor standings')
+  const data = await res.json()
+  const standings = data.MRData?.StandingsTable?.StandingsLists?.[0]?.ConstructorStandings || []
+  return standings
+}
