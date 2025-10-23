@@ -39,7 +39,6 @@ export default function LapTimesChart({ laps, drivers, filters, pitStops = [] }:
     // Build per-driver lap times array indexed by lap number
     const perDriver: Record<string, number[]> = {}
     const perDriverRaw: Record<string, number[]> = {} // For outlier detection
-    const labels: string[] = []
     
     // First pass: collect all lap times for outlier detection
     for (const lap of laps) {
@@ -53,10 +52,11 @@ export default function LapTimesChart({ laps, drivers, filters, pitStops = [] }:
       }
     }
     
-    // Second pass: apply filters
+    // Second pass: build filtered data
     for (const lap of laps) {
       const lapNum = parseInt(lap.number)
       
+      // Only apply filters if they exist
       // Apply lap range filters
       if (filters?.lapRangeStart && lapNum < filters.lapRangeStart) continue
       if (filters?.lapRangeEnd && lapNum > filters.lapRangeEnd) continue
@@ -70,15 +70,13 @@ export default function LapTimesChart({ laps, drivers, filters, pitStops = [] }:
       const isPitLap = filters?.excludePitLaps && pitStops.some((ps: any) => parseInt(ps.lap) === lapNum)
       if (isPitLap) continue
       
-      labels.push(lap.number)
-      
       for (const timing of lap.Timings) {
         const id = timing.driverId
         if (!perDriver[id]) perDriver[id] = []
         
         const lapTime = timeToSeconds(timing.time)
         
-        // Apply filters
+        // Apply time-based filters only if filters exist
         if (filters && !filterLapTime(lapTime, filters, perDriverRaw[id] || [])) {
           perDriver[id].push(NaN) // Keep array aligned but exclude this data point
         } else {
@@ -118,10 +116,18 @@ export default function LapTimesChart({ laps, drivers, filters, pitStops = [] }:
   }
 
   const data = { labels, datasets }
+  
+  const totalLapsInRace = laps.length
+  const visibleLaps = labels.length
 
   return (
     <div className="chart">
       <h3>Lap-by-lap Lap Times</h3>
+      {visibleLaps < totalLapsInRace && (
+        <p className="chart-description" style={{ color: '#f59e0b', fontWeight: 500 }}>
+          ⚠️ Showing {visibleLaps} of {totalLapsInRace} laps (filters active). Use "Reset All" to see all laps.
+        </p>
+      )}
       <Line data={data} options={{
         responsive: true,
         plugins: { legend: { position: 'top' } },
