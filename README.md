@@ -4,6 +4,11 @@ Interactive Formula 1 Race Telemetry Dashboard for exploring and analyzing race 
 
 ## Features Implemented
 
+### 🎯 Navigation
+- **Tabbed Interface**: Clean navigation between Race Pace, Tyre Strategy, and Telemetry views
+- **Smooth Transitions**: Animated tab switching for better UX
+- **Organized Layout**: Each analysis type in its own focused view
+
 ### ✅ Part 1: Race Pace Analysis
 - Automatically loads the most recently completed race (using the Jolpica F1 API - Ergast replacement)
 - Allows changing season and round manually

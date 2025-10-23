@@ -16,6 +16,7 @@ export default function RaceSelector({ defaultRace }: Props) {
   const [selectedDrivers, setSelectedDrivers] = useState<string[]>([])
   const [laps, setLaps] = useState<any[]>([])
   const [pitStops, setPitStops] = useState<any[]>([])
+  const [activeTab, setActiveTab] = useState<'pace' | 'tyres' | 'telemetry'>('pace')
 
   // Fetch available races when season changes
   useEffect(() => {
@@ -127,13 +128,49 @@ export default function RaceSelector({ defaultRace }: Props) {
 
       <DriverSelector drivers={drivers} selected={selectedDrivers} onChange={setSelectedDrivers} />
 
-      <LapTimesChart laps={laps} drivers={selectedDrivers} />
+      {/* Tab Navigation */}
+      <div className="tabs">
+        <button 
+          className={`tab ${activeTab === 'pace' ? 'active' : ''}`}
+          onClick={() => setActiveTab('pace')}
+        >
+          📊 Race Pace
+        </button>
+        <button 
+          className={`tab ${activeTab === 'tyres' ? 'active' : ''}`}
+          onClick={() => setActiveTab('tyres')}
+        >
+          🛞 Tyre Strategy
+        </button>
+        <button 
+          className={`tab ${activeTab === 'telemetry' ? 'active' : ''}`}
+          onClick={() => setActiveTab('telemetry')}
+        >
+          🏎️ Telemetry
+        </button>
+      </div>
 
-      <TyreStrategyChart pitStops={pitStops} laps={laps} drivers={selectedDrivers} />
+      {/* Tab Content */}
+      <div className="tab-content">
+        {activeTab === 'pace' && (
+          <div className="tab-panel">
+            <LapTimesChart laps={laps} drivers={selectedDrivers} />
+          </div>
+        )}
 
-      <TyreDegradationChart pitStops={pitStops} laps={laps} drivers={selectedDrivers} />
+        {activeTab === 'tyres' && (
+          <div className="tab-panel">
+            <TyreStrategyChart pitStops={pitStops} laps={laps} drivers={selectedDrivers} />
+            <TyreDegradationChart pitStops={pitStops} laps={laps} drivers={selectedDrivers} />
+          </div>
+        )}
 
-      <TelemetryView laps={laps} drivers={selectedDrivers} raceName={race.raceName} season={race.season} round={race.round} />
+        {activeTab === 'telemetry' && (
+          <div className="tab-panel">
+            <TelemetryView laps={laps} drivers={selectedDrivers} raceName={race.raceName} season={race.season} round={race.round} />
+          </div>
+        )}
+      </div>
     </div>
   )
 }
