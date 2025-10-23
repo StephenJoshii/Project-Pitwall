@@ -10,6 +10,8 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
+import type { FilterOptions } from './LapFilters'
+import { filterLapTime } from './LapFilters'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
@@ -23,19 +25,65 @@ function timeToSeconds(t: string) {
   return m * 60 + s
 }
 
-export default function LapTimesChart({ laps, drivers }: any) {
+interface Props {
+  laps: any[]
+  drivers: string[]
+  filters?: FilterOptions
+  pitStops?: any[]
+}
+
+export default function LapTimesChart({ laps, drivers, filters, pitStops = [] }: Props) {
   const datasets = useMemo(() => {
     if (!laps || laps.length === 0 || !drivers || drivers.length === 0) return []
 
     // Build per-driver lap times array indexed by lap number
     const perDriver: Record<string, number[]> = {}
+    const perDriverRaw: Record<string, number[]> = {} // For outlier detection
     const labels: string[] = []
+    
+    // First pass: collect all lap times for outlier detection
     for (const lap of laps) {
+      for (const timing of lap.Timings) {
+        const id = timing.driverId
+        if (!perDriverRaw[id]) perDriverRaw[id] = []
+        const lapTime = timeToSeconds(timing.time)
+        if (!isNaN(lapTime) && lapTime > 0) {
+          perDriverRaw[id].push(lapTime)
+        }
+      }
+    }
+    
+    // Second pass: apply filters
+    for (const lap of laps) {
+      const lapNum = parseInt(lap.number)
+      
+      // Apply lap range filters
+      if (filters?.lapRangeStart && lapNum < filters.lapRangeStart) continue
+      if (filters?.lapRangeEnd && lapNum > filters.lapRangeEnd) continue
+      
+      // Apply race pace filter
+      if (filters?.showOnlyRacePace) {
+        if (lapNum === 1 || lapNum > laps.length - 3) continue
+      }
+      
+      // Check for pit stops on this lap
+      const isPitLap = filters?.excludePitLaps && pitStops.some((ps: any) => parseInt(ps.lap) === lapNum)
+      if (isPitLap) continue
+      
       labels.push(lap.number)
+      
       for (const timing of lap.Timings) {
         const id = timing.driverId
         if (!perDriver[id]) perDriver[id] = []
-        perDriver[id].push(timeToSeconds(timing.time))
+        
+        const lapTime = timeToSeconds(timing.time)
+        
+        // Apply filters
+        if (filters && !filterLapTime(lapTime, filters, perDriverRaw[id] || [])) {
+          perDriver[id].push(NaN) // Keep array aligned but exclude this data point
+        } else {
+          perDriver[id].push(lapTime)
+        }
       }
     }
 
@@ -48,12 +96,26 @@ export default function LapTimesChart({ laps, drivers }: any) {
       backgroundColor: colors[i % colors.length],
       tension: 0.2,
       pointRadius: 2,
+      spanGaps: true, // Connect lines even with NaN gaps
     }))
-  }, [laps, drivers])
+  }, [laps, drivers, filters, pitStops])
 
   if (!datasets || datasets.length === 0) return <div className="placeholder">Select drivers to see lap times</div>
 
-  const labels = laps.map((l: any) => `Lap ${l.number}`)
+  // Build labels from filtered laps
+  const labels: string[] = []
+  for (const lap of laps) {
+    const lapNum = parseInt(lap.number)
+    
+    if (filters?.lapRangeStart && lapNum < filters.lapRangeStart) continue
+    if (filters?.lapRangeEnd && lapNum > filters.lapRangeEnd) continue
+    if (filters?.showOnlyRacePace && (lapNum === 1 || lapNum > laps.length - 3)) continue
+    
+    const isPitLap = filters?.excludePitLaps && pitStops.some((ps: any) => parseInt(ps.lap) === lapNum)
+    if (isPitLap) continue
+    
+    labels.push(`Lap ${lap.number}`)
+  }
 
   const data = { labels, datasets }
 

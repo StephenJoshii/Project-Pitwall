@@ -7,6 +7,7 @@ import TyreDegradationChart from './TyreDegradationChart'
 import TelemetryView from './TelemetryView'
 import SectorAnalysis from './SectorAnalysis'
 import GapAnalysis from './GapAnalysis'
+import LapFilters, { type FilterOptions } from './LapFilters'
 
 type Props = { defaultRace: { season: string; round: string; raceName: string } }
 
@@ -19,6 +20,15 @@ export default function RaceSelector({ defaultRace }: Props) {
   const [laps, setLaps] = useState<any[]>([])
   const [pitStops, setPitStops] = useState<any[]>([])
   const [activeTab, setActiveTab] = useState<'pace' | 'tyres' | 'telemetry'>('pace')
+  const [filters, setFilters] = useState<FilterOptions>({
+    excludePitLaps: false,
+    excludeOutliers: false,
+    lapRangeStart: null,
+    lapRangeEnd: null,
+    minLapTime: null,
+    maxLapTime: null,
+    showOnlyRacePace: false,
+  })
 
   // Fetch available races when season changes
   useEffect(() => {
@@ -129,6 +139,9 @@ export default function RaceSelector({ defaultRace }: Props) {
       </div>
 
       <DriverSelector drivers={drivers} selected={selectedDrivers} onChange={setSelectedDrivers} />
+
+      {/* Lap Filters - shown for all tabs */}
+      <LapFilters filters={filters} onChange={setFilters} totalLaps={laps.length} />
 
       {/* Tab Navigation */}
       <div className="tabs">

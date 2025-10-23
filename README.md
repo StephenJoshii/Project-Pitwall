@@ -9,6 +9,13 @@ Interactive Formula 1 Race Telemetry Dashboard for exploring and analyzing race 
 - **Tabbed Interface**: Clean navigation within Race Analysis between Race Pace, Tyre Strategy, and Telemetry views
 - **Smooth Transitions**: Animated transitions for better UX
 - **Modern Design**: Dark sidebar with gradient, professional table layouts
+- **NEW: Smart Data Filters** 🔍
+  - Exclude pit laps (remove slow in/out laps from analysis)
+  - Exclude statistical outliers (remove safety car/incident laps)
+  - Race pace only mode (excludes lap 1 and final 3 laps for fuel-adjusted comparison)
+  - Custom lap range selection (analyze specific stints)
+  - Lap time range filtering (focus on specific pace windows)
+  - Real-time filter application across all charts
 
 ### 🏆 Season Overview
 - **Driver Standings**: Complete championship standings table with positions, points, wins, and team information
