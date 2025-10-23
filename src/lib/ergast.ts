@@ -76,3 +76,13 @@ export async function fetchConstructorStandings(season: string) {
   const standings = data.MRData?.StandingsTable?.StandingsLists?.[0]?.ConstructorStandings || []
   return standings
 }
+
+export async function fetchRaceResults(season: string, round: string) {
+  // Fetch final race results (finishing positions)
+  const url = `https://api.jolpi.ca/ergast/f1/${season}/${round}/results.json`
+  const res = await fetch(url)
+  if (!res.ok) throw new Error('Failed to fetch race results')
+  const data = await res.json()
+  const results = data.MRData?.RaceTable?.Races?.[0]?.Results || []
+  return results
+}

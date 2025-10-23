@@ -27,6 +27,13 @@ Interactive Formula 1 Race Telemetry Dashboard for exploring and analyzing race 
   - Color-coded personal bests (purple) and overall best sectors (⭐ stars)
   - Theoretical best lap time calculation (sum of best sectors)
   - Identify car strengths: which drivers/teams excel in which sectors
+- **NEW: Gap & Interval Analysis** 📊
+  - Real-time gap to race leader throughout the race
+  - Interval to car ahead (essential for understanding battles and overtakes)
+  - Dashed lines indicate pit stop laps
+  - Battle statistics: positions held, laps led, biggest gains/losses
+  - Visualize undercuts, overcuts, and strategic plays
+  - See when drivers are catching up or falling behind
 
 ### ✅ Part 2: Tyre Strategy and Wear
 - **Tyre Strategy Timeline**: Visual representation of each driver's pit stops and tyre stints
