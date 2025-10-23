@@ -21,6 +21,12 @@ Interactive Formula 1 Race Telemetry Dashboard for exploring and analyzing race 
 - Allows changing season and round manually
 - Displays drivers for the selected race and allows multi-select
 - Renders a lap-by-lap lap times chart for selected drivers
+- **NEW: Sector Time Analysis** 🏁
+  - Real sector times (S1, S2, S3) from OpenF1 API for 2023+ races
+  - Three view modes: Best Sectors, Sector Progression, Lap Comparison
+  - Color-coded personal bests (purple) and overall best sectors (⭐ stars)
+  - Theoretical best lap time calculation (sum of best sectors)
+  - Identify car strengths: which drivers/teams excel in which sectors
 
 ### ✅ Part 2: Tyre Strategy and Wear
 - **Tyre Strategy Timeline**: Visual representation of each driver's pit stops and tyre stints

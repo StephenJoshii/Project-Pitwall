@@ -5,6 +5,7 @@ import LapTimesChart from './LapTimesChart'
 import TyreStrategyChart from './TyreStrategyChart'
 import TyreDegradationChart from './TyreDegradationChart'
 import TelemetryView from './TelemetryView'
+import SectorAnalysis from './SectorAnalysis'
 
 type Props = { defaultRace: { season: string; round: string; raceName: string } }
 
@@ -155,6 +156,7 @@ export default function RaceSelector({ defaultRace }: Props) {
         {activeTab === 'pace' && (
           <div className="tab-panel">
             <LapTimesChart laps={laps} drivers={selectedDrivers} />
+            <SectorAnalysis drivers={selectedDrivers} raceName={race.raceName} season={race.season} round={race.round} />
           </div>
         )}
 

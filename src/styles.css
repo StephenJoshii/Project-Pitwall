@@ -122,3 +122,19 @@ body { font-family: Inter, Roboto, system-ui, -apple-system, 'Segoe UI', Roboto,
 .standings-table .wins { font-weight: 600; color: #6b7280; }
 
 .loading { padding: 40px; text-align: center; color: #6b7280; }
+
+/* Sector Analysis */
+.sector-analysis { margin-top: 16px; background: white; padding: 16px; border-radius: 8px; box-shadow: 0 1px 4px rgba(16,24,40,0.06); }
+.sector-analysis h3 { margin-top: 0; margin-bottom: 8px; }
+.sector-view-controls { display: flex; gap: 8px; margin: 16px 0; flex-wrap: wrap; }
+.sector-view-btn { padding: 10px 20px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; color: #6b7280; transition: all 0.2s; }
+.sector-view-btn:hover { border-color: #3b82f6; color: #3b82f6; }
+.sector-view-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+.sector-chart-container { margin-top: 16px; }
+.sector-chart-container h4 { margin: 16px 0 8px 0; font-size: 16px; color: #374151; }
+.sector-progression-charts { display: flex; flex-direction: column; gap: 24px; }
+.sector-chart { background: #fafafa; padding: 16px; border-radius: 6px; }
+.sector-stats-table { margin-top: 24px; overflow-x: auto; }
+.sector-stats-table h4 { margin: 0 0 12px 0; }
+.sector-best-overall { background: #f3e8ff !important; color: #6b21a8; font-weight: 700; }
+.sector-theoretical { font-weight: 700; color: #059669; font-family: 'Courier New', monospace; }
