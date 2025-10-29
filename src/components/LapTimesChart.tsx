@@ -124,7 +124,7 @@ export default function LapTimesChart({ laps, drivers, filters, pitStops = [] }:
     <div className="chart">
       <h3>Lap-by-lap Lap Times</h3>
       {visibleLaps < totalLapsInRace && (
-        <p className="chart-description" style={{ color: '#f59e0b', fontWeight: 500 }}>
+        <p className="chart-description warning">
           ⚠️ Showing {visibleLaps} of {totalLapsInRace} laps (filters active). Use "Reset All" to see all laps.
         </p>
       )}
