@@ -31,6 +31,10 @@
   .filters-grid {
     grid-template-columns: 1fr;
   }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
 }
 
 /* Mobile */
@@ -96,6 +100,18 @@
   
   .range-separator {
     display: none;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-card {
+    padding: 14px;
+  }
+  
+  .stat-icon {
+    font-size: 24px;
   }
 }
 

@@ -8,6 +8,7 @@ import TelemetryView from './TelemetryView'
 import SectorAnalysis from './SectorAnalysis'
 import GapAnalysis from './GapAnalysis'
 import LapFilters, { type FilterOptions } from './LapFilters'
+import QuickStats from './QuickStats'
 
 type Props = { defaultRace: { season: string; round: string; raceName: string } }
 
@@ -137,6 +138,9 @@ export default function RaceSelector({ defaultRace }: Props) {
           </div>
         </div>
       </div>
+
+      {/* Quick Stats */}
+      <QuickStats laps={laps} pitStops={pitStops} selectedDrivers={selectedDrivers} />
 
       <DriverSelector drivers={drivers} selected={selectedDrivers} onChange={setSelectedDrivers} />
 
