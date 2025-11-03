@@ -120,9 +120,50 @@ export default function LapTimesChart({ laps, drivers, filters, pitStops = [] }:
   const totalLapsInRace = laps.length
   const visibleLaps = labels.length
 
+  // Helper: format seconds -> mm:ss.xxx or ss.xxx
+  function secondsToTime(sec: number | null | undefined) {
+    if (sec === null || sec === undefined || isNaN(sec)) return ''
+    const minutes = Math.floor(sec / 60)
+    const seconds = (sec % 60).toFixed(3)
+    if (minutes > 0) return `${minutes}:${seconds.padStart(6, '0')}`
+    return `${seconds}`
+  }
+
+  function exportVisibleLapsCSV() {
+    if (!data || !data.labels || !data.datasets) return
+    const header = ['Lap', ...data.datasets.map((d: any) => d.label)]
+    const rows: string[][] = [header]
+
+    for (let i = 0; i < data.labels.length; i++) {
+      const row: string[] = []
+      row.push(data.labels[i])
+      for (const ds of data.datasets) {
+        const v = ds.data[i]
+        row.push(secondsToTime(v))
+      }
+      rows.push(row)
+    }
+
+    const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(',')).join('\n')
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'visible_laps.csv'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <div className="chart">
-      <h3>Lap-by-lap Lap Times</h3>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h3>Lap-by-lap Lap Times</h3>
+        <div className="chart-actions">
+          <button className="export-btn" onClick={exportVisibleLapsCSV}>⬇️ Download visible laps CSV</button>
+        </div>
+      </div>
       {visibleLaps < totalLapsInRace && (
         <p className="chart-description warning">
           ⚠️ Showing {visibleLaps} of {totalLapsInRace} laps (filters active). Use "Reset All" to see all laps.
